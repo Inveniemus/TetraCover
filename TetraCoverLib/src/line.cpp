@@ -3,7 +3,7 @@
 std::string Line::draw() const {
     std::stringstream txt_stream;
 
-    for (auto cell : cells) {
+    for (auto cell : cells_) {
         txt_stream << cell.draw();
     }
     txt_stream << "\n";

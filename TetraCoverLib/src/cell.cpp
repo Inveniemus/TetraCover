@@ -1,7 +1,7 @@
 #include <cell.h>
 
 std::string Cell::draw() const {
-    switch (color)
+    switch (color_)
     {
     case BLACK:
         return "B";

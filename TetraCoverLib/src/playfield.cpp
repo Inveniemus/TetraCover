@@ -2,7 +2,16 @@
 
 Playfield::Playfield(std::size_t width, std::size_t height) :
         width_(width), height_(height) {
-    lines.resize(height_);
+    lines_.resize(height_);
+}
+
+Cell& Playfield::cell(std::size_t x, std::size_t y) {
+    if (!(x < width_) && (y < height_)) {
+        // todo: error handling
+        throw std::exception();
+    }
+
+    return lines_[y].cell(x);
 }
 
 std::string Playfield::debug_string() const {
@@ -16,8 +25,9 @@ std::string Playfield::debug_string() const {
 std::string Playfield::draw() const {
 
     std::stringstream txt_stream;
+    
     // Lines are bottom-up stored. We want to draw reversed order!
-    for (auto r_it = lines.rbegin(); r_it != lines.rend(); r_it++) {
+    for (auto r_it = lines_.rbegin(); r_it != lines_.rend(); r_it++) {
         txt_stream << r_it->draw();
     }
 

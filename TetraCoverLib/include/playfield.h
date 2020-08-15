@@ -2,9 +2,11 @@
 #define PLAYFIELD_H
 
 #include <line.h>
+#include <cell.h>
 
 #include <cstddef>
 #include <vector>
+#include <array>
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -12,7 +14,17 @@
 class Playfield {
 public:
     Playfield(std::size_t width, std::size_t height);
-    Playfield() : Playfield(10, 20) {}
+    Playfield() : Playfield(10, 22) {}
+
+    ///@brief Getter for any Cell of the Playfield
+    ///
+    ///@param x column number, starting at 0
+    ///@param y line number from bottom to top, starting at 0
+    ///@return Cell& a reference to the Cell at (x, y)
+    Cell& cell(std::size_t x, std::size_t y);
+
+    size_t height() const { return lines_.size(); }
+    size_t width() const { return lines_[0].size(); }
 
     // Debug stuff
     /// to get debugging information
@@ -20,7 +32,6 @@ public:
 
     /// To draw the Playfield to the console
     ///@return std::string 
-    ///
     std::string draw() const;
 
 private:
@@ -28,7 +39,7 @@ private:
     std::size_t width_;
     std::size_t height_;
 
-    std::vector<Line> lines;
+    std::vector<Line> lines_;
 };
 
 #endif

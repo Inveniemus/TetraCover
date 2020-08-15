@@ -9,6 +9,11 @@ else()
     add_compile_options(-Wall -Wextra -Wswitch-enum)
 endif()
 
-add_library(TetraCoverLib STATIC src/playfield.cpp src/line.cpp src/cell.cpp)
+add_library(TetraCoverLib STATIC 
+    src/playfield.cpp
+    src/line.cpp
+    src/cell.cpp
+    src/tetromino.cpp
+)
 
 target_include_directories(TetraCoverLib PUBLIC include PRIVATE src)

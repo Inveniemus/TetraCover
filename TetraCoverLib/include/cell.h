@@ -7,14 +7,17 @@
 
 class Cell {
 public:
-    Cell() : color(BLACK) {}
+    Cell() : color_(BLACK) {}
 
-    bool is_empty() const { return color == BLACK; }
+    bool is_empty() const { return color_ == BLACK; }
+
+    void set_color(const Color color) { color_ = color; }
+    const Color& color() const { return color_; }
 
     std::string draw() const;
 
 private:
-    Color color;
+    Color color_;
 };
 
 #endif
