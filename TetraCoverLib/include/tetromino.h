@@ -7,6 +7,7 @@
 #include <coords.h>
 
 #include <vector>
+#include <algorithm>
 
 ///@brief Defines a Tetromino, imcluding:
 /// - Which cells it occupies,
@@ -25,14 +26,14 @@ public:
     ///@param dx 
     ///@return true when the move is possible and was done.
     ///@return false when the move is impossible.
-    bool move_x(std::size_t dx);
+    bool move_x(short dx);
 
     ///@brief Moves a tetromino vertically and returns true if the move is
     /// possible. Otherwise, there is no move and it returns false.
     ///@param dy
     ///@return true when the move is possible and was done.
     ///@return false when the move is impossible.
-    bool move_y(std::size_t dy);
+    bool move_y(short dy);
 
 private:
     Color color_;
@@ -40,6 +41,7 @@ private:
 
     Playfield& playfield_;
     void update_playfield_() const;
+    void clear_playfield_() const;
 
     std::pair<size_t, size_t> x_bound_() const;
     std::pair<size_t, size_t> y_bound_() const;

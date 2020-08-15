@@ -7,16 +7,17 @@
 ///@brief Simple handling class for coordinates
 class Coords {
 public:
-    Coords(std::size_t x, std::size_t y) { coords_ = std::make_pair(x, y); }
+    Coords(std::size_t x, std::size_t y) : x_(x), y_(y) {}
     
-    std::size_t x() const { return coords_.first; }
-    std::size_t y() const { return coords_.second; }
+    std::size_t x() const { return x_; }
+    std::size_t y() const { return y_; }
 
-    void set_x(std::size_t x) { coords_.first = x; }
-    void set_y(std::size_t y) { coords_.first = y; }
+    void set_x(std::size_t x) { x_ = x; }
+    void set_y(std::size_t y) { y_ = y; }
 
 private:
-    std::pair<std::size_t, std::size_t> coords_;
+    std::size_t x_;
+    std::size_t y_;
 };
 
 #endif

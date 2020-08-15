@@ -74,12 +74,37 @@ Tetromino::Tetromino(char nature, Playfield& playfield) :
     update_playfield_();
 }
 
-bool Tetromino::move_x(std::size_t dx) {
+bool Tetromino::move_x(short dx) {
 
-    for (auto cell_c : cell_coords_) {
+    for (const auto& cell_c : cell_coords_) {
+        // Left and right walls collision
+        if ((short)cell_c.x() + dx < 0) return false;
+        if ((short)cell_c.x() + dx >= playfield_.width()) return false;
+    }
+
+    clear_playfield_();
+    for (auto& cell_c : cell_coords_) {
         cell_c.set_x(cell_c.x() + dx);
     }
     update_playfield_();
+    
+    return true;
+}
+
+bool Tetromino::move_y(short dy) {
+
+    for (const auto& cell_c : cell_coords_) {
+        // Bottom and top(?!?) walls collision
+        if ((short)cell_c.y() + dy < 0) return false;
+        if ((short)cell_c.y() + dy >= playfield_.height()) return false;
+    }
+
+    clear_playfield_();
+    for (auto& cell_c : cell_coords_) {
+        cell_c.set_y(cell_c.y() + dy);
+    }
+    update_playfield_();
+    
     return true;
 }
 
@@ -88,5 +113,11 @@ bool Tetromino::move_x(std::size_t dx) {
 void Tetromino::update_playfield_() const {
     for (const auto cell_coord : cell_coords_) {
         playfield_.cell(cell_coord.x(), cell_coord.y()).set_color(color_);
+    }
+}
+
+void Tetromino::clear_playfield_() const {
+    for (const auto cell_coord : cell_coords_) {
+        playfield_.cell(cell_coord.x(), cell_coord.y()).set_color(BLACK);
     }
 }

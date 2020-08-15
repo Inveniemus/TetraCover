@@ -7,8 +7,8 @@ Playfield::Playfield(std::size_t width, std::size_t height) :
 
 Cell& Playfield::cell(std::size_t x, std::size_t y) {
     if (!(x < width_) && (y < height_)) {
-        // todo: error handling
-        throw std::exception();
+        std::cout << x << " - " << y << std::endl;
+        throw std::out_of_range(std::string("Trying to access a cell."));
     }
 
     return lines_[y].cell(x);
