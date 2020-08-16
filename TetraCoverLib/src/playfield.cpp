@@ -14,6 +14,10 @@ Cell& Playfield::cell(std::size_t x, std::size_t y) {
     return lines_[y].cell(x);
 }
 
+bool Playfield::cell_occupied(std::size_t x, std::size_t y) {
+    return (cell(x, y).color() != BLACK);
+}
+
 std::string Playfield::debug_string() const {
     std::stringstream txt_stream;
 

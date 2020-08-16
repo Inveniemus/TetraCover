@@ -43,8 +43,7 @@ private:
     void update_playfield_() const;
     void clear_playfield_() const;
 
-    std::pair<size_t, size_t> x_bound_() const;
-    std::pair<size_t, size_t> y_bound_() const;
+    bool contains_cell_(std::size_t x, std::size_t y) const;
 };
 
 #endif

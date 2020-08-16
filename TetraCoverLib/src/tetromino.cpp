@@ -75,11 +75,21 @@ Tetromino::Tetromino(char nature, Playfield& playfield) :
 }
 
 bool Tetromino::move_x(short dx) {
-
+    
     for (const auto& cell_c : cell_coords_) {
+
+        const int new_x = cell_c.x() + dx;
+        const int y = cell_c.y();
+
         // Left and right walls collision
-        if ((short)cell_c.x() + dx < 0) return false;
-        if ((short)cell_c.x() + dx >= playfield_.width()) return false;
+        if (new_x < 0) return false;
+        if (new_x >= (int)playfield_.width()) return false;
+
+        // Left and right occupied cell collision, IF NOT part of this 
+        // Tetromino.
+        if (!contains_cell_(new_x, y) && 
+                playfield_.cell_occupied(new_x, y)) 
+            return false;
     }
 
     clear_playfield_();
@@ -94,9 +104,20 @@ bool Tetromino::move_x(short dx) {
 bool Tetromino::move_y(short dy) {
 
     for (const auto& cell_c : cell_coords_) {
-        // Bottom and top(?!?) walls collision
-        if ((short)cell_c.y() + dy < 0) return false;
-        if ((short)cell_c.y() + dy >= playfield_.height()) return false;
+
+        const int x = cell_c.x();
+        const int new_y = cell_c.y() + dy;
+        
+
+        // Left and right walls collision
+        if (new_y < 0) return false;
+        if (new_y >= (int)playfield_.height()) return false;
+
+        // Left and right occupied cell collision, IF NOT part of this 
+        // Tetromino.
+        if (!contains_cell_(x, new_y) && 
+                playfield_.cell_occupied(x, new_y)) 
+            return false;
     }
 
     clear_playfield_();
@@ -120,4 +141,14 @@ void Tetromino::clear_playfield_() const {
     for (const auto cell_coord : cell_coords_) {
         playfield_.cell(cell_coord.x(), cell_coord.y()).set_color(BLACK);
     }
+}
+
+bool Tetromino::contains_cell_(std::size_t x, std::size_t y) const {
+    return std::any_of(
+        cell_coords_.cbegin(),
+        cell_coords_.cend(),
+        [x, y](Coords coords) {
+            return coords.x() == x && coords.y() == y;
+        }
+    );
 }
