@@ -1,5 +1,4 @@
 **/build
 **/.vscode
 /gui_app/dependencies
-/TetraCoverLib/.vscode
 /doc

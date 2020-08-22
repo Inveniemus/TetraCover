@@ -11,22 +11,29 @@ MainWindow::MainWindow()
     
     Bind(wxEVT_MENU, &MainWindow::on_about_, this, wxID_ABOUT);
     Bind(wxEVT_MENU, &MainWindow::on_exit_, this, wxID_EXIT);
-    Bind(wxEVT_MENU, &MainWindow::on_new_game_, this, ID_NEW_GAME);
+    Bind(wxEVT_MENU, &MainWindow::on_new_game_, this, ID_MENU_NEW_GAME);
+    Bind(wxEVT_MENU, &MainWindow::on_debug_, this, ID_MENU_DEBUG);
+
     this->Connect(wxEVT_PAINT, wxPaintEventHandler(MainWindow::on_paint_));
 }
 
 void MainWindow::build_menus_() {
     menu_file_ptr_ = std::unique_ptr<wxMenu>{new wxMenu()};
     menu_file_ptr_->Append(
-        wxID_ANY, "New Game", "Start a new game!"
+        ID_MENU_NEW_GAME, "New Game", "Start a new game!"
     );
     menu_file_ptr_->Append(wxID_EXIT);
     
     menu_help_ptr_ = std::unique_ptr<wxMenu>{new wxMenu()};
     menu_help_ptr_->Append(wxID_ABOUT);
 
+    menu_debug_ptr_ = std::unique_ptr<wxMenu>{new wxMenu()};
+    menu_debug_ptr_->Append(
+        ID_MENU_DEBUG, "TEST 1");
+
     menubar_ptr_ = std::unique_ptr<wxMenuBar>{new wxMenuBar()};
     menubar_ptr_->Append(menu_file_ptr_.get(), "&File");
+    menubar_ptr_->Append(menu_debug_ptr_.get(), "&Debug");
     menubar_ptr_->Append(menu_help_ptr_.get(), "&Help");
 
     SetMenuBar(menubar_ptr_.get());
@@ -54,4 +61,8 @@ void MainWindow::on_paint_(wxPaintEvent& event) {
     wxCoord x_origin = 100, y_origin = 100;
     wxCoord width = 200, height = 400;
     dc.DrawRectangle(x_origin, y_origin, width, height);
+}
+
+void MainWindow::on_debug_(wxCommandEvent &event) {
+    
 }
