@@ -1,0 +1,7 @@
+add_executable(${CMAKE_PROJECT_NAME}CLI src/main.cpp)
+
+find_library(TETRA_COVER_LIB TetraCoverLib PATHS ../lib/build REQUIRED)
+
+target_link_libraries(${CMAKE_PROJECT_NAME}CLI TetraCoverLib)
+target_include_directories(${CMAKE_PROJECT_NAME}CLI PUBLIC ../lib/include)
+

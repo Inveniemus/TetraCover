@@ -2,9 +2,6 @@ cmake_minimum_required(VERSION 3.17)
 
 project(TetraCover)
 
-add_executable(${CMAKE_PROJECT_NAME} src/main.cpp)
-
-
 if (MSCV)
     message("Using msvc compiler...")
 else()
@@ -12,5 +9,8 @@ else()
     add_compile_options(-Wall -Wextra -Wswitch-enum)
 endif()
 
-add_subdirectory(TetraCoverLib)
-target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC TetraCoverLib)
+add_subdirectory(lib)
+
+add_subdirectory(cli_app)
+
+add_subdirectory(gui_app)

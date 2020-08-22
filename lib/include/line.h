@@ -19,7 +19,7 @@ public:
     ///@return Cell& a reference to the Cell
     Cell& cell(size_t x) { return cells_[x]; }
 
-    size_t size() const { return cells_.size(); }
+    std::size_t size() const { return cells_.size(); }
 
     // Debug stuff
     std::string draw() const;

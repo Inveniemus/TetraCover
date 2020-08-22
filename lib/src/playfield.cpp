@@ -15,7 +15,7 @@ Cell& Playfield::cell(std::size_t x, std::size_t y) {
 }
 
 bool Playfield::cell_occupied(std::size_t x, std::size_t y) {
-    return (cell(x, y).color() != BLACK);
+    return (!cell(x, y).is_empty());
 }
 
 std::string Playfield::debug_string() const {

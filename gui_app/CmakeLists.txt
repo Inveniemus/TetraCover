@@ -1,0 +1,15 @@
+add_executable(${CMAKE_PROJECT_NAME}GUI 
+    src/main.cpp
+    src/main_window.cpp)
+
+add_subdirectory(dependencies/wxWidgets-3.1.4)
+
+find_library(TETRA_COVER_LIB TetraCoverLib PATHS ../lib/build REQUIRED)
+
+target_link_libraries(${CMAKE_PROJECT_NAME}GUI PRIVATE 
+    wx::net wx::core wx::base TetraCoverLib)
+
+#target_link_libraries(${CMAKE_PROJECT_NAME}GUI TetraCoverLib)
+target_include_directories(${CMAKE_PROJECT_NAME}GUI PUBLIC ../lib/include)
+
+target_include_directories(${CMAKE_PROJECT_NAME}GUI PUBLIC include)
