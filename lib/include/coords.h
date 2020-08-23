@@ -4,6 +4,8 @@
 #include <cstddef>
 #include <utility>
 
+namespace tetralib {
+
 ///@brief Simple handling class for coordinates
 class Coords {
 public:
@@ -19,5 +21,7 @@ private:
     std::size_t x_;
     std::size_t y_;
 };
+
+} // tetralib namespace
 
 #endif

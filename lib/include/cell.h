@@ -1,9 +1,11 @@
 #ifndef CELL_H
 #define CELL_H
 
+#include <string>
+
 #include <color_enum.h>
 
-#include <string>
+namespace tetralib {
 
 class Cell {
 public:
@@ -19,5 +21,7 @@ public:
 private:
     Color color_;
 };
+
+} // namespace tetralib
 
 #endif

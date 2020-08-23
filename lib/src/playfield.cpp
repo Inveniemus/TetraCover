@@ -1,11 +1,11 @@
 #include <playfield.h>
 
-Playfield::Playfield(std::size_t width, std::size_t height) :
+tetralib::Playfield::Playfield(std::size_t width, std::size_t height) :
         width_(width), height_(height) {
     lines_.resize(height_);
 }
 
-Cell& Playfield::cell(std::size_t x, std::size_t y) {
+tetralib::Cell& tetralib::Playfield::cell(std::size_t x, std::size_t y) {
     if (!(x < width_) && (y < height_)) {
         std::cout << x << " - " << y << std::endl;
         throw std::out_of_range(std::string("Trying to access a cell."));
@@ -14,11 +14,11 @@ Cell& Playfield::cell(std::size_t x, std::size_t y) {
     return lines_[y].cell(x);
 }
 
-bool Playfield::cell_occupied(std::size_t x, std::size_t y) {
+bool tetralib::Playfield::cell_occupied(std::size_t x, std::size_t y) {
     return (!cell(x, y).is_empty());
 }
 
-std::string Playfield::debug_string() const {
+std::string tetralib::Playfield::debug_string() const {
     std::stringstream txt_stream;
 
     txt_stream << "PLAYFIELD\nHEIGHT: " << height_ << " WIDTH: " << width_;
@@ -26,7 +26,7 @@ std::string Playfield::debug_string() const {
     return txt_stream.str();
 }
 
-std::string Playfield::draw() const {
+std::string tetralib::Playfield::draw() const {
 
     std::stringstream txt_stream;
     

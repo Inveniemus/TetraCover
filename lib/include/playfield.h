@@ -6,10 +6,11 @@
 
 #include <cstddef>
 #include <vector>
-#include <array>
 #include <string>
 #include <iostream>
 #include <sstream>
+
+namespace tetralib {
 
 class Playfield {
 public:
@@ -51,5 +52,7 @@ private:
 
     std::vector<Line> lines_;
 };
+
+} // namespace tetralib
 
 #endif

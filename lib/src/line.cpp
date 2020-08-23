@@ -1,6 +1,7 @@
 #include <line.h>
 
-std::string Line::draw() const {
+
+std::string tetralib::Line::draw() const {
     std::stringstream txt_stream;
 
     for (auto cell : cells_) {

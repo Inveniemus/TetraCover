@@ -9,6 +9,8 @@
 #include <vector>
 #include <algorithm>
 
+namespace tetralib {
+
 ///@brief Defines a Tetromino, imcluding:
 /// - Which cells it occupies,
 /// - How it move right, left, and how it rotates
@@ -45,5 +47,7 @@ private:
 
     bool contains_cell_(std::size_t x, std::size_t y) const;
 };
+
+} // namespace tetralib
 
 #endif

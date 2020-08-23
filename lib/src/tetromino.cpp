@@ -1,6 +1,6 @@
 #include <tetromino.h>
 
-Tetromino::Tetromino(char nature, Playfield& playfield) :
+tetralib::Tetromino::Tetromino(char nature, Playfield& playfield) :
          playfield_(playfield) {
     
     // Index of the central cell or the one immediately to the left if even
@@ -74,7 +74,7 @@ Tetromino::Tetromino(char nature, Playfield& playfield) :
     update_playfield_();
 }
 
-bool Tetromino::move_x(short dx) {
+bool tetralib::Tetromino::move_x(short dx) {
     
     for (const auto& cell_c : cell_coords_) {
 
@@ -101,7 +101,7 @@ bool Tetromino::move_x(short dx) {
     return true;
 }
 
-bool Tetromino::move_y(short dy) {
+bool tetralib::Tetromino::move_y(short dy) {
 
     for (const auto& cell_c : cell_coords_) {
 
@@ -131,19 +131,19 @@ bool Tetromino::move_y(short dy) {
 
 // PRIVATE_____________________________________________________________________
 
-void Tetromino::update_playfield_() const {
+void tetralib::Tetromino::update_playfield_() const {
     for (const auto cell_coord : cell_coords_) {
         playfield_.cell(cell_coord.x(), cell_coord.y()).set_color(color_);
     }
 }
 
-void Tetromino::clear_playfield_() const {
+void tetralib::Tetromino::clear_playfield_() const {
     for (const auto cell_coord : cell_coords_) {
         playfield_.cell(cell_coord.x(), cell_coord.y()).set_color(BLACK);
     }
 }
 
-bool Tetromino::contains_cell_(std::size_t x, std::size_t y) const {
+bool tetralib::Tetromino::contains_cell_(std::size_t x, std::size_t y) const {
     return std::any_of(
         cell_coords_.cbegin(),
         cell_coords_.cend(),

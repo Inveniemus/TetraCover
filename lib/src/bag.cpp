@@ -1,8 +1,6 @@
 #include <bag.h>
 
-constexpr std::array<char, 7> Bag::TETROMINOES;
-
-char Bag::get_letter() {
+char tetralib::Bag::get_letter() {
 
     if (content_.empty()) {
         fill_();
@@ -14,7 +12,7 @@ char Bag::get_letter() {
 }
 
 // PRIVATE ____________________________________________________________________
-void Bag::fill_() {
+void tetralib::Bag::fill_() {
 
     content_.clear();
     std::random_device dr;

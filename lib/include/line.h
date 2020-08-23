@@ -8,6 +8,8 @@
 #include <string>
 #include <sstream>
 
+namespace tetralib {
+
 class Line {
 public:
     Line() : Line(10) {}
@@ -27,5 +29,7 @@ public:
 private:
     std::vector<Cell> cells_;
 };
+
+} // namespace tetralib
 
 #endif

@@ -1,6 +1,8 @@
 #ifndef COLOR_ENUM_H
 #define COLOR_ENUM_H
 
+namespace tetralib {
+
 enum Color {
     BLACK,      // No tetramino
     LIGHT_BLUE, // I
@@ -11,5 +13,7 @@ enum Color {
     BLUE,       // J
     ORANGE      // L
 };
+
+} // namespace tetralib
 
 #endif

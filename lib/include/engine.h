@@ -3,7 +3,10 @@
 
 #include <tetromino.h>
 #include <bag.h>
+#include <playfield.h>
 #include <memory>
+
+namespace tetralib {
 
 class Engine {
 public:
@@ -27,5 +30,7 @@ private:
     std::unique_ptr<Tetromino> active_tetro_;
     void freeze_();
 };
+
+} // namespace tetralib
 
 #endif

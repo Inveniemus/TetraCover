@@ -1,6 +1,6 @@
 #include <engine.h>
 
-void Engine::step() {
+void tetralib::Engine::step() {
     
     if (!active_tetro_) {
         const char new_letter = bag_.get_letter();
@@ -14,6 +14,6 @@ void Engine::step() {
     }
 }
 
-void Engine::freeze_() {
+void tetralib::Engine::freeze_() {
     active_tetro_.reset(nullptr);
 }

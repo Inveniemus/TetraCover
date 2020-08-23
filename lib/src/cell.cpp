@@ -1,6 +1,6 @@
 #include <cell.h>
 
-std::string Cell::draw() const {
+std::string tetralib::Cell::draw() const {
     switch (color_)
     {
     case BLACK:
