@@ -26,5 +26,10 @@ bool TestApp::OnInit()
     window_ = std::unique_ptr<MainWindow>{new MainWindow(engine_)};
     window_->Show(true);
 
+    engine_.step();
+    engine_.step();
+    engine_.step();
+    engine_.step();
+
     return true;
 }

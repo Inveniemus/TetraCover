@@ -23,9 +23,14 @@ public:
     ///@param y line number from bottom to top, starting at 0
     ///@return Cell& a reference to the Cell at (x, y)
     Cell& cell(std::size_t x, std::size_t y);
-    // TODO: const Cell& cell(std::size_t x, std::size_t y) const;
+    const Cell& cell(std::size_t x, std::size_t y) const;
 
+    ///@brief Height of the playfield, as a number of cells
+    ///@return size_t number of cells
     size_t height() const { return lines_.size(); }
+    
+    ///@brief Width of the playfield, as a number of cells
+    ///@return size_t number of cells
     size_t width() const { return lines_[0].size(); }
 
     ///@brief Checks if the cell at x,y is occupied.

@@ -20,6 +20,7 @@ public:
     ///@param x cell position in the line
     ///@return Cell& a reference to the Cell
     Cell& cell(size_t x) { return cells_[x]; }
+    const Cell& cell(size_t x) const { return cells_[x]; }
 
     std::size_t size() const { return cells_.size(); }
 

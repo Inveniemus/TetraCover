@@ -14,6 +14,15 @@ tetralib::Cell& tetralib::Playfield::cell(std::size_t x, std::size_t y) {
     return lines_[y].cell(x);
 }
 
+const tetralib::Cell& tetralib::Playfield::cell(std::size_t x, std::size_t y) const {
+    if (!(x < width_) && (y < height_)) {
+        std::cout << x << " - " << y << std::endl;
+        throw std::out_of_range(std::string("Trying to access a cell."));
+    }
+
+    return lines_[y].cell(x);
+}
+
 bool tetralib::Playfield::cell_occupied(std::size_t x, std::size_t y) {
     return (!cell(x, y).is_empty());
 }

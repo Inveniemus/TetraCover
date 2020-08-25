@@ -7,8 +7,8 @@ MainWindow::MainWindow(tetralib::Engine& engine)
     
     build_menus_();
 
-    CreateStatusBar();
-    SetStatusText("Welcome to TetraCover!");
+    //CreateStatusBar();
+    //SetStatusText("Welcome to TetraCover!");
     
     Bind(wxEVT_MENU, &MainWindow::on_about_, this, wxID_ABOUT);
     Bind(wxEVT_MENU, &MainWindow::on_exit_, this, wxID_EXIT);
