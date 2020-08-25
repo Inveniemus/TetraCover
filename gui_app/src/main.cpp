@@ -1,4 +1,5 @@
 #include <main_window.h>
+#include <engine.h>
 
 // wxWidgets library
 // For compilers that support precompilation, includes "wx/wx.h".
@@ -15,13 +16,14 @@ public:
     virtual bool OnInit();
 private:
     std::unique_ptr<MainWindow> window_;
+    tetralib::Engine engine_;
 };
 
 wxIMPLEMENT_APP(TestApp);
 
 bool TestApp::OnInit()
 {
-    window_ = std::unique_ptr<MainWindow>{new MainWindow()};
+    window_ = std::unique_ptr<MainWindow>{new MainWindow(engine_)};
     window_->Show(true);
 
     return true;

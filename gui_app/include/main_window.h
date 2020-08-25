@@ -1,3 +1,6 @@
+#include <engine.h>
+#include <playfield_panel.h>
+
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
     #include <wx/wx.h>
@@ -18,7 +21,7 @@ const auto DEFAULT_POSITION = wxPoint{100, 100};
 class MainWindow : public wxFrame
 {
 public:
-    MainWindow();
+    MainWindow(tetralib::Engine&);
 
     // Event IDs
     enum IDs {
@@ -27,6 +30,9 @@ public:
     };
 
 private:
+
+    // Tetralib Engine instance
+    tetralib::Engine& engine_;
     // Menu bar
     std::unique_ptr<wxMenuBar> menubar_ptr_;
     std::unique_ptr<wxMenu> menu_file_ptr_;
@@ -46,6 +52,4 @@ private:
     void on_about_(wxCommandEvent& event);
     void on_new_game_(wxCommandEvent& event);
     void on_debug_(wxCommandEvent& event);
-    // Painting
-    void on_paint_(wxPaintEvent& event);
 };

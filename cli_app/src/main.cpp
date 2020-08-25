@@ -6,8 +6,11 @@
 
 int main() {
 
-    Playfield playfield;
-    auto engine = Engine(playfield);
+    using tetralib::Playfield;
+    using tetralib::Engine;
+
+    auto engine = Engine();
+    auto const playfield = engine.get_playfield();
 
     engine.step();
     engine.step();

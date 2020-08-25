@@ -1,6 +1,7 @@
 add_executable(${CMAKE_PROJECT_NAME}GUI 
     src/main.cpp
-    src/main_window.cpp)
+    src/main_window.cpp
+    src/playfield_panel.cpp)
 
 add_subdirectory(dependencies/wxWidgets-3.1.4)
 

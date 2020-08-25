@@ -1,5 +1,9 @@
 #include <engine.h>
 
+tetralib::Engine::Engine() {
+
+}
+
 void tetralib::Engine::step() {
     
     if (!active_tetro_) {

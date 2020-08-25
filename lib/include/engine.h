@@ -10,10 +10,8 @@ namespace tetralib {
 
 class Engine {
 public:
-    ///@brief Construct a new Engine object. It requires a reference to the
-    /// playfield.
-    ///@param ref Playfield reference
-    Engine(Playfield& ref) : playfield_(ref) {}
+    ///@brief Construct a new Engine object.
+    Engine();
 
     ///@brief method to call when time elapses between two moves due to 
     /// gravity. It typically moves the active Tetromino down by one increment,
@@ -22,9 +20,11 @@ public:
     /// gets a new one from the bag.
     void step();
 
+    const Playfield& get_playfield() const { return playfield_; }
+
 private:
 
-    Playfield& playfield_;
+    Playfield playfield_;
     Bag bag_;
 
     std::unique_ptr<Tetromino> active_tetro_;

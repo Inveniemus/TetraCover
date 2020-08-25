@@ -1,7 +1,8 @@
 #include <main_window.h>
 
-MainWindow::MainWindow()
-    : wxFrame(NULL, wxID_ANY, WINDOW_TITLE, DEFAULT_POSITION, DEFAULT_SIZE)
+MainWindow::MainWindow(tetralib::Engine& engine)
+    : wxFrame(NULL, wxID_ANY, WINDOW_TITLE, DEFAULT_POSITION, DEFAULT_SIZE),
+      engine_(engine)
 {
     
     build_menus_();
@@ -14,7 +15,10 @@ MainWindow::MainWindow()
     Bind(wxEVT_MENU, &MainWindow::on_new_game_, this, ID_MENU_NEW_GAME);
     Bind(wxEVT_MENU, &MainWindow::on_debug_, this, ID_MENU_DEBUG);
 
-    this->Connect(wxEVT_PAINT, wxPaintEventHandler(MainWindow::on_paint_));
+
+    playfield_panel_ = std::unique_ptr<wxPanel>{
+        new PlayfieldPanel(this, engine_.get_playfield())
+    };
 }
 
 void MainWindow::build_menus_() {
@@ -51,16 +55,6 @@ void MainWindow::on_about_(wxCommandEvent& event)
 
 void MainWindow::on_new_game_(wxCommandEvent& event) {
 
-}
-
-void MainWindow::on_paint_(wxPaintEvent& event) {
-    wxPaintDC dc(this);
-    dc.SetPen(*wxBLACK_DASHED_PEN);
-    dc.SetBrush(*wxBLACK_BRUSH);
-
-    wxCoord x_origin = 100, y_origin = 100;
-    wxCoord width = 200, height = 400;
-    dc.DrawRectangle(x_origin, y_origin, width, height);
 }
 
 void MainWindow::on_debug_(wxCommandEvent &event) {
