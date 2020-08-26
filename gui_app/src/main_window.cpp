@@ -16,9 +16,12 @@ MainWindow::MainWindow(tetralib::Engine& engine)
     Bind(wxEVT_MENU, &MainWindow::on_debug_, this, ID_MENU_DEBUG);
 
 
-    playfield_panel_ = std::unique_ptr<wxPanel>{
+    playfield_panel_ = std::shared_ptr<PlayfieldPanel>{
         new PlayfieldPanel(this, engine_.get_playfield())
     };
+    timer_ = std::unique_ptr<Timer>(new Timer(engine_, playfield_panel_));
+
+    timer_->start(1000);
 }
 
 void MainWindow::build_menus_() {

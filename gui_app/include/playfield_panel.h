@@ -12,6 +12,9 @@ class PlayfieldPanel : public wxPanel {
 public:
     PlayfieldPanel(wxFrame*, const tetralib::Playfield&);
 
+    ///@brief Called when timer is elapsed, requesting redrawing.
+    void timer_elapsed() { this->Refresh(); }
+
 private:
     const tetralib::Playfield& playfield_;
 

@@ -1,3 +1,5 @@
+#include <timer.h>
+
 #include <engine.h>
 #include <playfield_panel.h>
 
@@ -44,7 +46,8 @@ private:
     void build_menus_(); 
 
     // Panel of the playfield
-    std::unique_ptr<wxPanel> playfield_panel_;
+    std::shared_ptr<PlayfieldPanel> playfield_panel_;
+    std::unique_ptr<Timer> timer_;
 
     // Event handlers
     // Menus
