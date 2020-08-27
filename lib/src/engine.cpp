@@ -1,7 +1,9 @@
 #include <engine.h>
 
-tetralib::Engine::Engine() {
+#include <algorithm>
 
+tetralib::Engine::Engine() {
+    last_snapshot.timer_interval = 1000; // Starts with one second gravity
 }
 
 void tetralib::Engine::step() {
@@ -18,6 +20,21 @@ void tetralib::Engine::step() {
     }
 }
 
+// Observable implementation
+void tetralib::Engine::add_observer(Observer* observer) {
+    observers_.push_back(observer);
+    notify();
+}
+
+void tetralib::Engine::remove_observer(Observer* observer) {
+    std::remove(observers_.begin(), observers_.end(), observer);
+}
+
+void tetralib::Engine::notify() {
+    for (auto observer : observers_) observer->update(last_snapshot);
+}
+
+// PRIVATE ___________________________________________________________________
 void tetralib::Engine::freeze_() {
     active_tetro_.reset(nullptr);
 }

@@ -8,3 +8,7 @@ void Timer::Notify() {
 void Timer::start(size_t ms) {
     wxTimer::Start(ms);
 }
+
+void Timer::update(const tetralib::EngineSnapshot& snapshot) {
+    start(snapshot.timer_interval);
+}

@@ -4,11 +4,14 @@
 #include <tetromino.h>
 #include <bag.h>
 #include <playfield.h>
+#include <observer.h>
+
 #include <memory>
+#include <functional>
 
 namespace tetralib {
 
-class Engine {
+class Engine : public Observable {
 public:
     ///@brief Construct a new Engine object.
     Engine();
@@ -20,7 +23,19 @@ public:
     /// gets a new one from the bag.
     void step();
 
+    void strafe_left() { active_tetro_->move_x(-1); }
+    void strafe_right() { active_tetro_->move_x(1); }
+
     const Playfield& get_playfield() const { return playfield_; }
+    void change_timer_interval(size_t new_interval) {
+        last_snapshot.timer_interval = new_interval;
+        notify();
+    }
+
+    // Observable implementation
+    void add_observer(Observer*);
+    void remove_observer(Observer*);
+    void notify();
 
 private:
 
@@ -29,6 +44,9 @@ private:
 
     std::unique_ptr<Tetromino> active_tetro_;
     void freeze_();
+
+    std::vector<Observer*> observers_;
+    EngineSnapshot last_snapshot;
 };
 
 } // namespace tetralib

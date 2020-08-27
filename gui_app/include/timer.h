@@ -1,6 +1,7 @@
 #include <playfield_panel.h>
 
 #include <engine.h>
+#include <observer.h>
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
@@ -9,7 +10,7 @@
 
 #include <memory>
 
-class Timer : public wxTimer {
+class Timer : public wxTimer, public tetralib::Observer {
 public:
     ///@brief Construct a new Timer object
     ///@param ptr a shared_ptr to the wxPanel that need to be refreshed.
@@ -21,6 +22,9 @@ public:
 
     ///@brief (Re)start the timer with the passed interval in milliseconds
     void start(size_t);
+
+    // Observer implementation
+    void update(const tetralib::EngineSnapshot&);
 
 private:
     tetralib::Engine& engine_;
