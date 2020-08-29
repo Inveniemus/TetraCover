@@ -23,7 +23,7 @@ const tetralib::Cell& tetralib::Playfield::cell(std::size_t x, std::size_t y) co
     return lines_[y].cell(x);
 }
 
-bool tetralib::Playfield::cell_occupied(std::size_t x, std::size_t y) {
+bool tetralib::Playfield::cell_occupied(std::size_t x, std::size_t y) const {
     return (!cell(x, y).is_empty());
 }
 

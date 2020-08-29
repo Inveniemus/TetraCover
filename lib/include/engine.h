@@ -5,9 +5,9 @@
 #include <bag.h>
 #include <playfield.h>
 #include <observer.h>
+#include <engine_snapshot.h>
 
 #include <memory>
-#include <functional>
 
 namespace tetralib {
 
@@ -23,8 +23,9 @@ public:
     /// gets a new one from the bag.
     void step();
 
-    void strafe_left() { active_tetro_->move_x(-1); }
-    void strafe_right() { active_tetro_->move_x(1); }
+    void tetro_left();
+    void tetro_right();
+    void tetro_down();
 
     const Playfield& get_playfield() const { return playfield_; }
     void change_timer_interval(size_t new_interval) {
@@ -32,9 +33,11 @@ public:
         notify();
     }
 
-    // Observable implementation
+    /// Observable implementation
     void add_observer(Observer*);
+    /// Observable implementation
     void remove_observer(Observer*);
+    /// Observable implementation
     void notify();
 
 private:
@@ -43,7 +46,16 @@ private:
     Bag bag_;
 
     std::unique_ptr<Tetromino> active_tetro_;
+    void draw_tetro_();
+    void clear_tetro_();
     void freeze_();
+
+    enum class DIRECTION {
+        RIGHT,
+        LEFT,
+        DOWN
+    };
+    bool move_tetro_(DIRECTION);
 
     std::vector<Observer*> observers_;
     EngineSnapshot last_snapshot;

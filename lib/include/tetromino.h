@@ -21,7 +21,10 @@ public:
     ///@brief Construct a new Tetromino object from its nature.
     /// It can be I, O, T, S, Z, J or L
     ///@param nature a char as nature.
-    Tetromino(char nature, Playfield& playfield);
+    Tetromino(char nature, const Playfield& playfield);
+
+    const std::vector<Coords>& get_cell_coords() const { return cell_coords_; }
+    const Color& get_color() const { return color_; }
 
     ///@brief Moves a tetromino horizontally and returns true if the move is
     /// possible. Otherwise, there is no move and it returns false.
@@ -37,13 +40,13 @@ public:
     ///@return false when the move is impossible.
     bool move_y(short dy);
 
+    bool rotate() { return false; }
+
 private:
     Color color_;
     std::vector<Coords> cell_coords_;
 
-    Playfield& playfield_;
-    void update_playfield_() const;
-    void clear_playfield_() const;
+    const Playfield& playfield_;
 
     bool contains_cell_(std::size_t x, std::size_t y) const;
 };

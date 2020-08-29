@@ -34,13 +34,11 @@ public:
     size_t width() const { return lines_[0].size(); }
 
     ///@brief Checks if the cell at x,y is occupied.
-    ///
-    ///@param x 
-    ///@param y 
+    ///@param x position in its line
+    ///@param y line position on the playfield
     ///@return true it's occupied!
     ///@return false it's free!
-    ///@todo Make it const
-    bool cell_occupied(std::size_t x, std::size_t y);
+    bool cell_occupied(std::size_t x, std::size_t y) const;
 
     // Debug stuff
     /// to get debugging information
@@ -52,8 +50,8 @@ public:
 
 private:
     // As number of cells
-    std::size_t width_;
-    std::size_t height_;
+    size_t width_;
+    size_t height_;
 
     std::vector<Line> lines_;
 };

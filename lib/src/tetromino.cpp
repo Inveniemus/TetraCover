@@ -1,6 +1,6 @@
 #include <tetromino.h>
 
-tetralib::Tetromino::Tetromino(char nature, Playfield& playfield) :
+tetralib::Tetromino::Tetromino(char nature, const Playfield& playfield) :
          playfield_(playfield) {
     
     // Index of the central cell or the one immediately to the left if even
@@ -70,8 +70,6 @@ tetralib::Tetromino::Tetromino(char nature, Playfield& playfield) :
     default:
         break;
     }
-
-    update_playfield_();
 }
 
 bool tetralib::Tetromino::move_x(short dx) {
@@ -92,12 +90,9 @@ bool tetralib::Tetromino::move_x(short dx) {
             return false;
     }
 
-    clear_playfield_();
     for (auto& cell_c : cell_coords_) {
         cell_c.set_x(cell_c.x() + dx);
     }
-    update_playfield_();
-    
     return true;
 }
 
@@ -119,29 +114,13 @@ bool tetralib::Tetromino::move_y(short dy) {
                 playfield_.cell_occupied(x, new_y)) 
             return false;
     }
-
-    clear_playfield_();
     for (auto& cell_c : cell_coords_) {
         cell_c.set_y(cell_c.y() + dy);
     }
-    update_playfield_();
-    
     return true;
 }
 
 // PRIVATE_____________________________________________________________________
-
-void tetralib::Tetromino::update_playfield_() const {
-    for (const auto cell_coord : cell_coords_) {
-        playfield_.cell(cell_coord.x(), cell_coord.y()).set_color(color_);
-    }
-}
-
-void tetralib::Tetromino::clear_playfield_() const {
-    for (const auto cell_coord : cell_coords_) {
-        playfield_.cell(cell_coord.x(), cell_coord.y()).set_color(BLACK);
-    }
-}
 
 bool tetralib::Tetromino::contains_cell_(std::size_t x, std::size_t y) const {
     return std::any_of(

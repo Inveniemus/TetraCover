@@ -1,13 +1,11 @@
 #ifndef OBSERVER_H
 #define OBSERVER_H
 
+#include <engine_snapshot.h>
+
 #include <vector>
 
 namespace tetralib {
-
-struct EngineSnapshot {
-    size_t timer_interval;
-};
 
 class Observer {
 public:
