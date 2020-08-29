@@ -14,10 +14,9 @@ class Timer : public wxTimer, public tetralib::Observer {
 public:
     ///@brief Construct a new Timer object
     ///@param ptr a shared_ptr to the wxPanel that need to be refreshed.
-    Timer(tetralib::Engine& engine, std::shared_ptr<PlayfieldPanel> ptr) : 
-        engine_(engine), playfield_panel_ptr(ptr) {}
+    Timer(tetralib::Engine& engine, std::shared_ptr<PlayfieldPanel> ptr);
     
-    ///@brief Notifies the engine and the playfield panel that time has elapsed
+    ///@brief Notifies the engine that time has elapsed
     void Notify();
 
     ///@brief (Re)start the timer with the passed interval in milliseconds

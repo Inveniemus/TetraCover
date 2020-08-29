@@ -4,7 +4,7 @@ MainWindow::MainWindow(tetralib::Engine& engine)
     : wxFrame(NULL, wxID_ANY, WINDOW_TITLE, DEFAULT_POSITION, DEFAULT_SIZE),
       engine_(engine)
 {
-    
+    std::cout << "CTOR MainWindow" << std::endl;
     build_menus_();
 
     //CreateStatusBar();
@@ -15,11 +15,12 @@ MainWindow::MainWindow(tetralib::Engine& engine)
     Bind(wxEVT_MENU, &MainWindow::on_new_game_, this, ID_MENU_NEW_GAME);
     Bind(wxEVT_MENU, &MainWindow::on_debug_, this, ID_MENU_DEBUG);
 
+    timer_ = std::unique_ptr<Timer>(new Timer(engine_, playfield_panel_));
     playfield_panel_ = std::shared_ptr<PlayfieldPanel>{
         new PlayfieldPanel(this, engine_)
     };
-    timer_ = std::unique_ptr<Timer>(new Timer(engine_, playfield_panel_));
     engine_.add_observer(timer_.get());
+    std::cout << "CTOR MainWindow EXITS" << std::endl;
 }
 
 void MainWindow::build_menus_() {
@@ -44,20 +45,20 @@ void MainWindow::build_menus_() {
     SetMenuBar(menubar_ptr_.get());
 }
 
-void MainWindow::on_exit_(wxCommandEvent& event)
+void MainWindow::on_exit_(wxCommandEvent&)
 {
     Close(true);
 }
-void MainWindow::on_about_(wxCommandEvent& event)
+void MainWindow::on_about_(wxCommandEvent&)
 {
     wxMessageBox("This is a wxWidgets Hello World example",
                  "About Hello World", wxOK | wxICON_INFORMATION);
 }
 
-void MainWindow::on_new_game_(wxCommandEvent& event) {
+void MainWindow::on_new_game_(wxCommandEvent&) {
 
 }
 
-void MainWindow::on_debug_(wxCommandEvent &event) {
+void MainWindow::on_debug_(wxCommandEvent&) {
     
 }

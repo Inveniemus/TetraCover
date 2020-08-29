@@ -7,6 +7,7 @@
 BEGIN_EVENT_TABLE(PlayfieldPanel, wxPanel)
     EVT_PAINT(PlayfieldPanel::on_paint_)
     EVT_KEY_DOWN(PlayfieldPanel::on_key_down_)
+    EVT_KEY_UP(PlayfieldPanel::on_key_up_)
 END_EVENT_TABLE()
 
  PlayfieldPanel::PlayfieldPanel(
@@ -21,12 +22,18 @@ END_EVENT_TABLE()
     ),
     engine_(engine) {
 
+    engine.add_observer(this);
     SetBackgroundStyle(wxBG_STYLE_PAINT);
 }
 
+void PlayfieldPanel::update(const tetralib::EngineSnapshot& engine_snapshot) {
+    if (engine_snapshot.playfield_changed) Refresh();
+}
+
+
 // PRIVATE _____________________________________________________________________
 void
-PlayfieldPanel::on_paint_(wxPaintEvent& event) {
+PlayfieldPanel::on_paint_(wxPaintEvent&) {
 
     wxBufferedPaintDC dc(this);
     auto playfield = engine_.get_playfield();
@@ -95,24 +102,24 @@ PlayfieldPanel::on_paint_(wxPaintEvent& event) {
 
 void
 PlayfieldPanel::on_key_down_(wxKeyEvent& event) {
+    
     auto key_code = event.GetKeyCode();
-
     switch(key_code) {
         case 314: // LEFT ARROW
-            engine_.strafe_left();
+            engine_.tetro_left();
             break;
         case 315: // UP ARROW
         break;
         case 316: // RIGHT ARROW
-            engine_.strafe_right();
+            engine_.tetro_right();
             break;
         case 317: // DOWN ARROW
-        break;
+            engine_.tetro_down();
+            break;
     }
-    this->Refresh();
     event.Skip();
 }
 
-void PlayfieldPanel::on_key_up_(wxEvent&) {
-
+void PlayfieldPanel::on_key_up_(wxKeyEvent& event) {
+    event.Skip();
 }

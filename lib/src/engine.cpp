@@ -3,10 +3,12 @@
 #include <algorithm>
 
 tetralib::Engine::Engine() {
-    last_snapshot.timer_interval = 1000; // Starts with one second gravity
+    current_snapshot.timer_interval = 1000; // Starts with one second gravity
 }
 
 void tetralib::Engine::step() {
+    
+    std::cout << "STEP" << std::endl;
     
     if (!active_tetro_) {
         const char new_letter = bag_.get_letter();
@@ -15,23 +17,32 @@ void tetralib::Engine::step() {
         );
         draw_tetro_();
     } else {
-        clear_tetro_();
-        bool has_dropped = active_tetro_->move_y(-1);
-        draw_tetro_();
-        if (!has_dropped) freeze_();
-    }    
+        if (!move_tetro_(DIRECTION::DOWN))
+            freeze_();
+    }
+    current_snapshot.playfield_changed = true;
+    notify();
 }
 
 void tetralib::Engine::tetro_right() {
-    if(move_tetro_(DIRECTION::RIGHT)) notify();
+    if(move_tetro_(DIRECTION::RIGHT)) {
+        current_snapshot.playfield_changed = true;
+        notify();
+    }
 }
 
 void tetralib::Engine::tetro_left() {
-    if(move_tetro_(DIRECTION::LEFT)) notify();
+    if(move_tetro_(DIRECTION::LEFT)) {
+        current_snapshot.playfield_changed = true;
+        notify();
+    }
 }
 
 void tetralib::Engine::tetro_down() {
-    if(move_tetro_(DIRECTION::DOWN)) notify();
+    if(move_tetro_(DIRECTION::DOWN)) {
+        current_snapshot.playfield_changed = true;
+        notify();
+    }
 }
 
 // Observable implementation
@@ -45,7 +56,10 @@ void tetralib::Engine::remove_observer(Observer* observer) {
 }
 
 void tetralib::Engine::notify() {
-    for (auto observer : observers_) observer->update(last_snapshot);
+    std::cout << current_snapshot.timer_interval << std::endl;
+    std::cout << (current_snapshot.playfield_changed ? "CHANGED" : "UNCHANGED") << std::endl;
+    for (auto observer : observers_) observer->update(current_snapshot);
+    current_snapshot.reset();
 }
 
 // PRIVATE ___________________________________________________________________
@@ -66,12 +80,12 @@ void tetralib::Engine::freeze_() {
     active_tetro_.reset(nullptr);
 }
 
-bool tetralib::Engine::move_tetro_(DIRECTION strafe) {
+bool tetralib::Engine::move_tetro_(DIRECTION direction) {
     bool result = false;
     
     clear_tetro_();
     if (active_tetro_) {
-        switch (strafe)
+        switch (direction)
         {
         case DIRECTION::RIGHT:
             result = active_tetro_->move_x(1);

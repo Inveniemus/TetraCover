@@ -27,9 +27,7 @@ bool TestApp::OnInit()
     window_->Show(true);
 
     engine_.step();
-    engine_.step();
-    engine_.step();
-    engine_.step();
+
 
     return true;
 }

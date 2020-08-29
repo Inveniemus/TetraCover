@@ -29,7 +29,7 @@ public:
 
     const Playfield& get_playfield() const { return playfield_; }
     void change_timer_interval(size_t new_interval) {
-        last_snapshot.timer_interval = new_interval;
+        current_snapshot.timer_interval = new_interval;
         notify();
     }
 
@@ -58,7 +58,7 @@ private:
     bool move_tetro_(DIRECTION);
 
     std::vector<Observer*> observers_;
-    EngineSnapshot last_snapshot;
+    EngineSnapshot current_snapshot;
 };
 
 } // namespace tetralib
